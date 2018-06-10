@@ -3,17 +3,20 @@ package testing.test;
 import static org.testng.Assert.assertTrue;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
 
 public class Examples {
 	
 	private WebDriver driver;
-	private String codeFolder = "C:/Users/ipgb2/Desktop/Pat/Development/testpages/";
+	private String codeFolder = "C:/Users/ipgb2/Desktop/Pat/Development/Selenium/testpages/";
 
 	@BeforeTest 
 	public void setUP() {
@@ -268,6 +271,7 @@ public class Examples {
 		assert e2.getText().equals("Dropped!");
 	}
 	
+	
 	//RIGHT CLICK
 	@Test (enabled=false)
 	public void test16(){
@@ -282,30 +286,126 @@ public class Examples {
 	}
 	
 	//Maximize Window
-		@Test (enabled=false)
-		public void test17() throws InterruptedException{
-			driver.get("file://"+codeFolder+"draganddrop.html");
-			driver.manage().window().maximize();
-			//minimize method doesn't exist getSize() and setSize() allow you to specify a size
-			Thread.sleep(2000);
-			Dimension d = new Dimension(500,600);
-			driver.manage().window().setSize(d);
-			Thread.sleep(2000);
-		}
+	@Test (enabled=false)
+	public void test17() throws InterruptedException{
+		driver.get("file://"+codeFolder+"draganddrop.html");
+		driver.manage().window().maximize();
+		//minimize method doesn't exist getSize() and setSize() allow you to specify a size
+		Thread.sleep(2000);
+		Dimension d = new Dimension(500,600);
+		driver.manage().window().setSize(d);
+		Thread.sleep(2000);
+	}
+	
+	//Navigating Buttons (forward, refresh,etc)
+	@Test (enabled=false)
+	public void test18() throws InterruptedException {
+		driver.navigate().to("http://www.google.com");
+		Thread.sleep(2000);
+		driver.navigate().to("https://fb.com");
+		Thread.sleep(2000);
+		driver.navigate().back();
+		Thread.sleep(2000);
+		driver.navigate().forward();
+		Thread.sleep(2000);
+		driver.navigate().refresh();
+	}
+	
+	//Handling Session  Cookies
+	@Test (enabled=false)
+	public void test19() throws InterruptedException {
+		driver.get("https://www.huffingtonpost.com");
 		
-		//Navigating Buttons (forward, refresh,etc)
-		@Test (enabled=true)
-		public void test18() throws InterruptedException {
-			driver.navigate().to("http://www.google.com");
-			Thread.sleep(2000);
-			driver.navigate().to("https://fb.com");
-			Thread.sleep(2000);
-			driver.navigate().back();
-			Thread.sleep(2000);
-			driver.navigate().forward();
-			Thread.sleep(2000);
-			driver.navigate().refresh();
-		}
+		WebElement editionBtn = driver.findElement(By.cssSelector("div[class^=editions__current-edition__edition]"));
+		editionBtn.click();
+		
+		WebElement usEdition = driver.findElement(By.xpath("//a[contains(text(),'United States')]"));
+		Thread.sleep(5000);
+		usEdition.click();
+		
+		Cookie country = driver.manage().getCookieNamed("country_view");
+		System.out.println(country.getValue());
+	}
+
+	//ImplicitWait and ExplicitWait
+	@Test (enabled=false)
+	public void test20(){
+		driver.get("https://www.huffingtonpost.com");
+		
+		WebElement editionBtn = driver.findElement(By.cssSelector("div[class^=editions__current-edition__edition]"));
+		editionBtn.click();
+		
+		WebElement usEdition = driver.findElement(By.xpath("//a[contains(text(),'United States')]"));
+		//Implicit Wait
+		//driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		
+		//Explicit Wait
+		WebDriverWait wait = new WebDriverWait(driver,10);
+		wait.until(ExpectedConditions.elementToBeClickable(usEdition));
+		usEdition.click();
+		
+		Cookie country = driver.manage().getCookieNamed("country_view");
+		System.out.println(country.getValue());
+	}
+	
+	//Frames
+	@Test (enabled=false)
+	public void test21(){
+		driver.get("file://"+codeFolder+"frames.html");
+		//To use different frames inside a window, first we should get current window "direction"
+		String currentWindow = driver.getWindowHandle();
+		
+		//then we can move inside its frames, and get into an specific frame
+		driver.switchTo().frame("left");
+		WebElement eLeft = driver.findElement(By.tagName("p"));
+		System.out.println(eLeft.getText());
+		
+		//if we want to move to another frame, first we have to go back to "parent" window
+		driver.switchTo().window(currentWindow);
+		
+		//now, we can move to another frame
+		driver.switchTo().frame("middle");
+		WebElement eMid = driver.findElement(By.tagName("p"));
+		System.out.println(eMid.getText());
+		
+		//Go back to parent Window
+		driver.switchTo().window(currentWindow);
+		
+		//Move to another frame, do not forget that frames also have id's (left, middle, right in this example)
+		driver.switchTo().frame("right");
+		WebElement eRight = driver.findElement(By.tagName("p"));
+		System.out.println(eRight.getText());
+	}
+	
+	
+	//Frames
+	@Test (enabled=true)
+	public void test22(){
+		//The difference between frame and iframe is that iframe comes from an external source
+		driver.get("file://"+codeFolder+"iframes.html");
+		
+		//for iframes we also need to get the "direction" of the current window
+		String currentWindow = driver.getWindowHandle();
+		
+		//then we need to instanciate a WebElement to get iframe id
+		WebElement iframe1 = driver.findElement(By.id("loonycorn"));
+		
+		//And now we can move to that frame as we did before (in frames)
+		driver.switchTo().frame(iframe1);
+		WebElement e1 = driver.findElement(By.tagName("p"));
+		System.out.println(e1.getText());
+		
+		//We also need to go back to "parent" window so we can change to another iframe
+		driver.switchTo().window(currentWindow);
+		
+		//And again go inside another iframe
+		WebElement iframe2 = driver.findElement(By.id("selenium"));
+		driver.switchTo().frame(iframe2);
+		WebElement e2 = driver.findElement(By.tagName("p"));
+		System.out.println(e2.getText());
+		
+		
+	}
 	
 	
 	@AfterTest

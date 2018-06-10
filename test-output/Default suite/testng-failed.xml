@@ -6,7 +6,7 @@
       <class name="testing.test.Examples">
         <methods>
           <include name="cleanUp"/>
-          <include name="test16"/>
+          <include name="test20"/>
           <include name="setUP"/>
         </methods>
       </class> <!-- testing.test.Examples -->
