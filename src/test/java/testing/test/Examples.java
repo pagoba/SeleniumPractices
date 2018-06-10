@@ -2,9 +2,13 @@ package testing.test;
 
 import static org.testng.Assert.assertTrue;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
@@ -378,8 +382,8 @@ public class Examples {
 	}
 	
 	
-	//Frames
-	@Test (enabled=true)
+	//iFrames
+	@Test (enabled=false)
 	public void test22(){
 		//The difference between frame and iframe is that iframe comes from an external source
 		driver.get("file://"+codeFolder+"iframes.html");
@@ -403,10 +407,98 @@ public class Examples {
 		driver.switchTo().frame(iframe2);
 		WebElement e2 = driver.findElement(By.tagName("p"));
 		System.out.println(e2.getText());
+	}
+
+	//PopUps windows
+	@Test (enabled=false)
+	public void test23(){
 		
+		driver.get("https://www.naukri.com");
+		
+		Set<String> allWindowHandles = driver.getWindowHandles();
+		for(String window:allWindowHandles) {
+			driver.switchTo().window(window);
+			System.out.println(driver.getTitle());
+		}
 		
 	}
 	
+	//PopUps windows
+		@Test (enabled=false)
+		public void test24(){
+			
+			driver.get("https://www.naukri.com");
+			
+			String mainWindow = driver.getWindowHandle();
+			Set<String> allWindows = driver.getWindowHandles();
+			
+			System.out.println("Before kill them, there were: "+allWindows.size()+" windows");
+			
+			for(String window:allWindows) {
+				if(!window.equals(mainWindow)) {
+					driver.switchTo().window(window);
+					System.out.println("Window Title: " +driver.getTitle() + " is going to die");
+					driver.close();
+				}
+			}
+			
+			System.out.println("Now we only have: "+driver.getWindowHandles().size());
+		}
+		
+	@Test (enabled=false)
+	public void test25(){
+		driver.get("file://"+codeFolder+"alerts.html");
+		
+		WebElement showBtn = driver.findElement(By.id("simple"));
+		showBtn.click();
+		//Create a WebDriverWait
+		WebDriverWait wait = new WebDriverWait(driver,10);
+		//Wait until alert is displayed
+		wait.until(ExpectedConditions.alertIsPresent());
+		//Create an instance of Alert to get access to its methods (accept, decline, etc)
+		Alert alert = driver.switchTo().alert();
+		System.out.println(alert.getText());
+		//Acept alert
+		alert.accept();
+	}
+	
+	//Lets code it - Alerts
+	@Test (enabled=false)
+	public void test26() {
+		driver.get("https://learn.letskodeit.com/p/practice");
+		
+		WebElement btnAlert = driver.findElement(By.id("alertbtn"));
+		btnAlert.click();
+		
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.alertIsPresent());
+		Alert alert = driver.switchTo().alert();
+		System.out.println("I'm the fucking alert and i say: "+alert.getText());
+		alert.accept();		
+	}
+	
+	//Take Screen Shots
+	@Test (enabled=false)
+	public void test27() throws Exception {
+		driver.get("https://learn.letskodeit.com/p/practice");
+		
+		File screen = ((TakesScreenshot)driver)
+				.getScreenshotAs(OutputType.FILE);
+		FileUtils.copyFile(screen, new File("/Users/ipgb2/Desktop/Pat/Development/Selenium/ScreenShots/ss2.png"));
+		
+	}
+	
+	//Take screen shot of an specific element (DOESN'T WORK)
+	@Test (enabled=false)
+	public void test28() throws Exception {
+		driver.get("file://"+codeFolder+"scraping.html");
+		
+		WebElement element = driver.findElement(By.className("author-about"));
+        FileUtils.copyFile(ScreenMethod.captureElementPic(element),
+                new File("/Users/ipgb2/Desktop/Pat/Development/Selenium/ScreenShots/ss3.png"));
+		
+	}
+		
 	
 	@AfterTest
 	public void cleanUp() throws InterruptedException {
