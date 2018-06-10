@@ -149,6 +149,7 @@ public class Examples {
 		assert carDD.getFirstSelectedOption().getText().equals("Benz");		
 	}
 	
+	//MULTIPLE SELECT
 	@Test (enabled=false)
 	public void test10() {
 		driver.get("https://learn.letskodeit.com/p/practice");
@@ -165,7 +166,8 @@ public class Examples {
 		//assert carDD.getFirstSelectedOption().getText().equals("Benz");		
 	}
 	
-	@Test (enabled=true)
+	//RADIO BUTTONS
+	@Test (enabled=false)
 	public void test11() {
 		driver.get("https://learn.letskodeit.com/p/practice");
 		
@@ -184,6 +186,127 @@ public class Examples {
 		assert radios.get(1).isSelected();
 
 	}
+	
+	//CHECKBOXES
+	@Test (enabled=false)
+	public void test12() {
+		driver.get("https://learn.letskodeit.com/p/practice");
+		
+		List<WebElement> checks = driver.findElements(By.xpath("//input[@type='checkbox'and@name='cars']"));
+		
+		checks.forEach(x->System.out.println(x.getText()));
+		
+		for(WebElement check:checks) {
+			
+			System.out.println(check.getAttribute("value"));
+			if(check.getAttribute("value").equals("bmw")) {
+				check.click();
+			}
+			if(check.getAttribute("value").equals("honda")) {
+				check.click();
+			}
+		}
+		
+		assert checks.get(0).isSelected()&&checks.get(2).isSelected();
+		
+		for(WebElement check:checks) {
+			
+			System.out.println(check.getAttribute("value"));
+			if(check.getAttribute("value").equals("bmw")) {
+				check.click();
+			}
+			if(check.getAttribute("value").equals("honda")) {
+				check.click();
+			}
+		}
+		
+		assert !checks.get(0).isSelected()&&!checks.get(2).isSelected();
+
+	}
+	
+	//Drag and Drop
+	@Test (enabled=false)
+	public void test13() {
+		driver.get("https://learn.letskodeit.com/p/practice");
+		Select fruits = new Select(driver.findElement(By.id("multiple-select-example")));
+		List <WebElement> fruitsOptions = fruits.getOptions();
+		Actions builder = new Actions(driver);
+		builder.click(fruitsOptions.get(0))
+			.keyDown(Keys.LEFT_SHIFT)
+			.click(fruitsOptions.get(2))
+			//.keyUp(Keys.COMMAND)
+			.perform();
+		List <WebElement> selected = fruits.getAllSelectedOptions();
+		selected.forEach(x->System.out.println(x.getText()));
+	}
+	
+	//Double click
+	@Test (enabled=false)
+	public void test14(){
+		driver.get("file://"+codeFolder+"doubleclick.html");
+		
+		WebElement elemento = driver.findElement(By.id("message"));
+		System.out.println(elemento.getCssValue("background-color"));
+		Actions builder = new Actions(driver);
+		builder.doubleClick(elemento).perform();
+		System.out.println(elemento.getCssValue("background-color"));
+	}
+	
+	//Drag and Drop
+	@Test (enabled=false)
+	public void test15() throws InterruptedException{
+		driver.get("file://"+codeFolder+"draganddrop.html");
+		
+		WebElement e1 = driver.findElement(By.id("draggable"));
+		WebElement e2 = driver.findElement(By.id("droppable"));
+		System.out.println(e2.getText());
+		Thread.sleep(2000);
+		Actions builder = new Actions(driver);
+		builder.dragAndDrop(e1, e2).perform();
+		System.out.println(e2.getText());
+		
+		assert e2.getText().equals("Dropped!");
+	}
+	
+	//RIGHT CLICK
+	@Test (enabled=false)
+	public void test16(){
+		driver.get("http://medialize.github.io/jQuery-contextMenu/demo.html");
+		WebElement elemento = driver.findElement(By.cssSelector("span.context-menu-one"));
+		
+		Actions builder = new Actions(driver);
+		builder.contextClick(elemento).build().perform();
+		
+		WebElement e2 = driver.findElement(By.cssSelector(".context-menu-item.context-menu-icon.context-menu-icon-edit"));
+		System.out.println(e2.getText());
+	}
+	
+	//Maximize Window
+		@Test (enabled=false)
+		public void test17() throws InterruptedException{
+			driver.get("file://"+codeFolder+"draganddrop.html");
+			driver.manage().window().maximize();
+			//minimize method doesn't exist getSize() and setSize() allow you to specify a size
+			Thread.sleep(2000);
+			Dimension d = new Dimension(500,600);
+			driver.manage().window().setSize(d);
+			Thread.sleep(2000);
+		}
+		
+		//Navigating Buttons (forward, refresh,etc)
+		@Test (enabled=true)
+		public void test18() throws InterruptedException {
+			driver.navigate().to("http://www.google.com");
+			Thread.sleep(2000);
+			driver.navigate().to("https://fb.com");
+			Thread.sleep(2000);
+			driver.navigate().back();
+			Thread.sleep(2000);
+			driver.navigate().forward();
+			Thread.sleep(2000);
+			driver.navigate().refresh();
+		}
+	
 	
 	@AfterTest
 	public void cleanUp() throws InterruptedException {

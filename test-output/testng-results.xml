@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" ignored="11" total="12" passed="1">
+<testng-results skipped="0" failed="0" ignored="18" total="19" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="17325" started-at="2018-06-10T04:53:56Z" finished-at="2018-06-10T04:54:13Z">
+  <suite name="Default suite" duration-ms="29276" started-at="2018-06-10T08:23:03Z" finished-at="2018-06-10T08:23:32Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="17325" started-at="2018-06-10T04:53:56Z" finished-at="2018-06-10T04:54:13Z">
+    <test name="Default test" duration-ms="29276" started-at="2018-06-10T08:23:03Z" finished-at="2018-06-10T08:23:32Z">
       <class name="testing.test.Examples">
-        <test-method status="PASS" signature="setUP()[pri:0, instance:testing.test.Examples@1794d431]" name="setUP" is-config="true" duration-ms="4812" started-at="2018-06-10T04:53:56Z" finished-at="2018-06-10T04:54:00Z">
+        <test-method status="PASS" signature="setUP()[pri:0, instance:testing.test.Examples@1794d431]" name="setUP" is-config="true" duration-ms="4466" started-at="2018-06-10T08:23:03Z" finished-at="2018-06-10T08:23:07Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUP -->
-        <test-method status="PASS" signature="test11()[pri:0, instance:testing.test.Examples@1794d431]" name="test11" duration-ms="6725" started-at="2018-06-10T04:54:00Z" finished-at="2018-06-10T04:54:07Z">
+        <test-method status="PASS" signature="test18()[pri:0, instance:testing.test.Examples@1794d431]" name="test18" duration-ms="19020" started-at="2018-06-10T08:23:07Z" finished-at="2018-06-10T08:23:26Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- test11 -->
-        <test-method status="PASS" signature="cleanUp()[pri:0, instance:testing.test.Examples@1794d431]" name="cleanUp" is-config="true" duration-ms="5726" started-at="2018-06-10T04:54:07Z" finished-at="2018-06-10T04:54:13Z">
+        </test-method> <!-- test18 -->
+        <test-method status="PASS" signature="cleanUp()[pri:0, instance:testing.test.Examples@1794d431]" name="cleanUp" is-config="true" duration-ms="5758" started-at="2018-06-10T08:23:26Z" finished-at="2018-06-10T08:23:32Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- cleanUp -->
