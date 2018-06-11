@@ -1,59 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="1" ignored="28" total="29" passed="0">
+<testng-results skipped="0" failed="0" ignored="29" total="30" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="12317" started-at="2018-06-10T21:38:47Z" finished-at="2018-06-10T21:38:59Z">
+  <suite name="Default suite" duration-ms="10671" started-at="2018-06-10T23:43:13Z" finished-at="2018-06-10T23:43:23Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="12317" started-at="2018-06-10T21:38:47Z" finished-at="2018-06-10T21:38:59Z">
+    <test name="Default test" duration-ms="10671" started-at="2018-06-10T23:43:13Z" finished-at="2018-06-10T23:43:23Z">
       <class name="testing.test.Examples">
-        <test-method status="PASS" signature="setUP()[pri:0, instance:testing.test.Examples@57baeedf]" name="setUP" is-config="true" duration-ms="3696" started-at="2018-06-10T21:38:47Z" finished-at="2018-06-10T21:38:51Z">
+        <test-method status="PASS" signature="setUP()[pri:0, instance:testing.test.Examples@57baeedf]" name="setUP" is-config="true" duration-ms="3483" started-at="2018-06-10T23:43:13Z" finished-at="2018-06-10T23:43:16Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUP -->
-        <test-method status="FAIL" signature="test28()[pri:0, instance:testing.test.Examples@57baeedf]" name="test28" duration-ms="2847" started-at="2018-06-10T21:38:51Z" finished-at="2018-06-10T21:38:54Z">
-          <exception class="java.awt.image.RasterFormatException">
-            <message>
-              <![CDATA[(x + width) is outside of Raster]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[java.awt.image.RasterFormatException: (x + width) is outside of Raster
-at sun.awt.image.ByteInterleavedRaster.createWritableChild(Unknown Source)
-at java.awt.image.BufferedImage.getSubimage(Unknown Source)
-at testing.test.ScreenMethod.captureElementPic(ScreenMethod.java:35)
-at testing.test.Examples.test28(Examples.java:497)
-at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
-at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
-at java.lang.reflect.Method.invoke(Unknown Source)
-at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
-at org.testng.internal.Invoker.invokeMethod(Invoker.java:580)
-at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:716)
-at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:988)
-at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
-at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
-at org.testng.TestRunner.privateRun(TestRunner.java:648)
-at org.testng.TestRunner.run(TestRunner.java:505)
-at org.testng.SuiteRunner.runTest(SuiteRunner.java:455)
-at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:450)
-at org.testng.SuiteRunner.privateRun(SuiteRunner.java:415)
-at org.testng.SuiteRunner.run(SuiteRunner.java:364)
-at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
-at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:84)
-at org.testng.TestNG.runSuitesSequentially(TestNG.java:1208)
-at org.testng.TestNG.runSuitesLocally(TestNG.java:1137)
-at org.testng.TestNG.runSuites(TestNG.java:1049)
-at org.testng.TestNG.run(TestNG.java:1017)
-at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
-at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
-at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-]]>
-            </full-stacktrace>
-          </exception> <!-- java.awt.image.RasterFormatException -->
+        <test-method status="PASS" signature="test29()[pri:0, instance:testing.test.Examples@57baeedf]" name="test29" duration-ms="1381" started-at="2018-06-10T23:43:16Z" finished-at="2018-06-10T23:43:18Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- test28 -->
-        <test-method status="PASS" signature="cleanUp()[pri:0, instance:testing.test.Examples@57baeedf]" name="cleanUp" is-config="true" duration-ms="5745" started-at="2018-06-10T21:38:54Z" finished-at="2018-06-10T21:38:59Z">
+        </test-method> <!-- test29 -->
+        <test-method status="PASS" signature="cleanUp()[pri:0, instance:testing.test.Examples@57baeedf]" name="cleanUp" is-config="true" duration-ms="5760" started-at="2018-06-10T23:43:18Z" finished-at="2018-06-10T23:43:23Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- cleanUp -->

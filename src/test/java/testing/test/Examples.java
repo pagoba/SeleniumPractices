@@ -498,6 +498,20 @@ public class Examples {
                 new File("/Users/ipgb2/Desktop/Pat/Development/Selenium/ScreenShots/ss3.png"));
 		
 	}
+	
+	//Execution of javaScrip code
+	@Test (enabled=true)
+	public void test29() {
+		driver.get("file://"+codeFolder+"scraping.html");
+		
+		JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+		
+		String title = (String) jsExecutor.executeScript("return document.title");
+		System.out.println(title);
+		long links = (Long) jsExecutor.executeScript("var links = document.getElementsByTagName('A'); return links.length");
+		System.out.println(links);
+		
+	}
 		
 	
 	@AfterTest
